@@ -1,0 +1,38 @@
+
+If we add this line in context.xml(tomcat\conf\),
+<Context antiResourceLocking="true">
+
+tomcat server is failed to start.
+we checked the logs,
+
+SEVERE [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[applicationwarname]はタイプ[java.lang.ThreadLocal]
+（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]
+（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@25afa0f1]）のThreadLocalを作成しましたが、 
+それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+
+
+
+
+04-Apr-2022 14:53:41.161 警告 [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads Webアプリケーション[wesfolder]は[grpc-shared-destroyer-0]という名前のスレッドを開始したようですが、停止に失敗しました。 これはメモリリークを引き起こす可能性が非常に高いです。 スレッドのスタックトレース：
+ java.base@15/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@15/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@15/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1661)
+ java.base@15/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@15/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@15/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1056)
+ java.base@15/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1116)
+ java.base@15/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+ java.base@15/java.lang.Thread.run(Thread.java:832)
+04-Apr-2022 14:53:41.163 SEVERE [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@25afa0f1]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.163 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@25cd99e5]）のキーと値タイプ[com.aspose.pdf.internal.l59y.l1v]（値[com.aspose.pdf.internal.l59y.l1v@7cc7dc3f]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.163 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@2437537e]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.164 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@7b22f1c5]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.164 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@32695df5]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.164 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@700d49a3]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.165 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@7a0143eb]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.165 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@60db5d59]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.165 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@fb269af]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.165 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@7fdc6da9]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.166 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@45d7c69e]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.166 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@2964644c]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
+04-Apr-2022 14:53:41.166 重大 [main] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks Webアプリケーション[wesfolder]はタイプ[java.lang.ThreadLocal]（値[java.lang.ThreadLocal@5d809a71]）のキーと値タイプ[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap]（値[io.grpc.netty.shaded.io.netty.util.internal.InternalThreadLocalMap@35079fde]）のThreadLocalを作成しましたが、 それはWebアプリケーションの停止時に削除されていません。スレッドは時間の経過とともに更新され、メモリリークの可能性を回避しようとしています。
